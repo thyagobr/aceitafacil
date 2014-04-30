@@ -1,4 +1,9 @@
 require "aceitafacil/version"
+require 'active_support/core_ext/class/attribute_accessors'
+require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/core_ext/hash'
+require "net/http"
+require "net/https"
 
 module Aceitafacil
     class Production
