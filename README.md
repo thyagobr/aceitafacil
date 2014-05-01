@@ -1,18 +1,18 @@
 # Aceitafacil
 
-TODO: Write a gem description
+Esta gem habilita as funcionalidades da API do serviço Aceita Fácil no Ruby on Rails.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Adicione esta linha ao seu Gemfile:
 
     gem 'aceitafacil'
 
-And then execute:
+E execute:
 
     $ bundle
 
-Or install it yourself as:
+Ou instale assim:
 
     $ gem install aceitafacil
 
