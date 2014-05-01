@@ -7,22 +7,44 @@ describe Aceitafacil::Card do
     @card = Aceitafacil::Card.new(card_params)
   end
 
-  describe "making a request" do
-    it "to create a new card" do
-      response = @card.save
-      response.body.should_not be_nil
-      response.should be_kind_of Net::HTTPSuccess
+  describe "make a remove call" do
+    it "should return nil if card is nil" do
+      remote_card = Aceitafacil::Card.remove(nil)
+      remote_card.should be_nil
     end
 
-    it "does something" do
-      response = @card.save
+    it "should remote a remote card" do
+      @card.save
+      
+      token = @card.token
 
-      json = JSON.parse(response.body)
+      remote_card = Aceitafacil::Card.remove(@card)
+      remote_card.token.should eq(token)
+      remote_card.status.should eq("removed")
+    end
+  end
 
-      json["card"].should_not be_nil
-      json["card"][0]["token"].should_not be_nil
-      json["card"][0]["card_brand"].should_not be_nil
-      json["card"][0]["last_digits"].should_not be_nil
+  describe "fetching existent cards" do
+    it "should be nil if customer_id is not passed" do
+      @card.save
+      @cards = Aceitafacil::Card.find_by_customer_id(nil) 
+      @cards.should be_nil
+    end
+
+    it "should return a list cards" do
+      @card.save
+      @cards = Aceitafacil::Card.find_by_customer_id("1") 
+      @cards.count.should == 1
+    end
+  end
+
+  describe "making a save call" do
+    it "should create a new remote card" do
+      @card.save
+
+      @card.token.should_not be_nil
+      @card.card_brand.should_not be_nil
+      @card.last_digits.should_not be_nil
     end
   end
 end

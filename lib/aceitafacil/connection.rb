@@ -25,5 +25,29 @@ module Aceitafacil
       
       return response
     end
+
+    def delete(path, params = {})
+      if not params.nil?
+        request = Net::HTTP::Delete.new("/#{path}?".concat(params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&'))) 
+      else
+        request = Net::HTTP::Delete.new("/#{path}")
+      end
+
+      request.basic_auth(Aceitafacil.api_key, Aceitafacil.api_password)
+      response = @http.request(request)
+      return response
+    end
+
+    def get(path, params={})
+      if not params.nil?
+        request = Net::HTTP::Get.new("/#{path}?".concat(params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&'))) 
+      else
+        request = Net::HTTP::Get.new("/#{path}")
+      end
+
+      request.basic_auth(Aceitafacil.api_key, Aceitafacil.api_password)
+      response = @http.request(request)
+      return response
+    end
   end
 end
