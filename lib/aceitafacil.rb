@@ -33,4 +33,4 @@ module Aceitafacil
     class MissingArgumentError < StandardError; end
 end
 
-[:version, :card, :connection].each { |lib| require "aceitafacil/#{lib}" }
+[:version, :card, :connection, :vendor, :bank, :payment, :item, :utils].each { |lib| require "aceitafacil/#{lib}" }

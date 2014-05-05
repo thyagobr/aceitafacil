@@ -79,6 +79,8 @@ module Aceitafacil
             self.token = json["card"][0]["token"]
             self.card_brand = json["card"][0]["card_brand"]
             self.last_digits = json["card"][0]["last_digits"]
+
+            return response
         end
     end
 end

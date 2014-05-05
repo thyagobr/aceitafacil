@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Aceitafacil::Connection do
   before do
-    FakeWeb.allow_net_connect = true
+    # FakeWeb.allow_net_connect = true
     @connection = Aceitafacil::Connection.new
   end
 
   after do
-    FakeWeb.allow_net_connect = false
+    # FakeWeb.allow_net_connect = false
   end
   
   it "should estabilish connection when was created" do

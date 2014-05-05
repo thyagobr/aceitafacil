@@ -1,4 +1,4 @@
-# Aceitafacil
+# Aceita Fácil
 
 Esta gem habilita as funcionalidades da API do serviço Aceita Fácil no Ruby on Rails.
 

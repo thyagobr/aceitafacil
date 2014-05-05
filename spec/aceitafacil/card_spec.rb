@@ -39,6 +39,12 @@ describe Aceitafacil::Card do
   end
 
   describe "making a save call" do
+    it "should return an http success" do
+      response = @card.save
+      
+      response.should be_kind_of Net::HTTPSuccess
+    end
+
     it "should create a new remote card" do
       @card.save
 

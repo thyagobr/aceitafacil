@@ -18,11 +18,16 @@ module Aceitafacil
     def post(path, params={})
       request = Net::HTTP::Post.new("/#{path}")
       request.basic_auth(Aceitafacil.api_key, Aceitafacil.api_password)
-
       request.set_form_data(params)
-
       response = @http.request(request)
-      
+      return response
+    end
+
+    def put(path, params={})
+      request = Net::HTTP::Put.new("/#{path}")
+      request.basic_auth(Aceitafacil.api_key, Aceitafacil.api_password)
+      request.set_form_data(params)
+      response = @http.request(request)
       return response
     end
 
@@ -32,11 +37,12 @@ module Aceitafacil
       else
         request = Net::HTTP::Delete.new("/#{path}")
       end
-
       request.basic_auth(Aceitafacil.api_key, Aceitafacil.api_password)
       response = @http.request(request)
       return response
     end
+
+
 
     def get(path, params={})
       if not params.nil?
@@ -44,7 +50,6 @@ module Aceitafacil
       else
         request = Net::HTTP::Get.new("/#{path}")
       end
-
       request.basic_auth(Aceitafacil.api_key, Aceitafacil.api_password)
       response = @http.request(request)
       return response
