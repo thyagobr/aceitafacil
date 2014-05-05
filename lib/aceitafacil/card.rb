@@ -1,7 +1,11 @@
 #encoding: utf-8
 
-module Aceitafacil 
+module Aceitafacil
     class Card
+        include ActiveModel::Validations
+
+        validates :customer_id, :number, :name, :cvv, :exp_date, presence: true
+
         attr_accessor :customer_id, :number, :name, :cvv, :exp_date
         attr_accessor :token, :card_brand, :last_digits, :status
 
@@ -72,6 +76,8 @@ module Aceitafacil
         end
 
         def save
+            return false if not self.valid?
+
             response = @connection.post("card", params)
 
             json = JSON.parse(response.body)

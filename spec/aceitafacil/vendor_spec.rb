@@ -3,23 +3,58 @@
 require 'spec_helper'
 
 describe Aceitafacil::Vendor do
+  let(:bank_params) {
+    { 
+      code: "001", 
+      agency: "123-4", 
+      account_type: 1, # 1 Corrent, 2 Poupança
+      account_number: "1234-5", 
+      account_holder_name: "Fulano",
+      account_holder_document_type: 1, # 1 CPF, 2 CNPJ
+      account_holder_document_number: "12345678909"
+    }
+  }
+
   let(:vendor_params) { 
     { 
-      id: "2", name: "Vendor name", email: "vendor@vendor.com", 
-      bank: { 
-        code: "001", 
-        agency: "123-4", 
-        account_type: 1, # 1 Corrent, 2 Poupança
-        account_number: "1234-5", 
-        account_holder_name: "Fulano",
-        account_holder_document_type: 1, # 1 CPF, 2 CNPJ
-        account_holder_document_number: "12345678909"
-      } 
+      id: "2", name: "Vendor name", email: "vendor@vendor.com", bank: @bank
     } 
   }
 
   before do
+    @bank = Aceitafacil::Bank.new(bank_params)
     @vendor = Aceitafacil::Vendor.new(vendor_params)
+  end
+
+  describe "instatiating a new card" do
+    it "should return valid true when valid? is called" do
+      @vendor = Aceitafacil::Vendor.new
+      @vendor.valid?.should be_false
+    end
+
+    it "should return valid true when it is saved" do
+      @vendor = Aceitafacil::Vendor.new
+      @vendor.save.should be_false
+    end
+
+    it "should return valid true when it is saved" do
+      @vendor = Aceitafacil::Vendor.new(id: 1, name: "Vendor name", email: "vendor@email.com", bank: nil)
+      @vendor.save.should be_false
+    end
+
+    it "should return valid true when it is saved" do
+      @vendor = Aceitafacil::Vendor.new(id: 1, name: "Vendor name", email: "vendor@email.com", bank: Aceitafacil::Bank.new)
+
+      @vendor.save.should be_false
+    end
+
+    it "should return message erros for fields" do
+      @vendor = Aceitafacil::Vendor.new
+      @vendor.valid?
+      [:id, :email, :name, :bank].each do |key|
+        @vendor.errors.messages.keys.should include(key)
+      end
+    end
   end
 
   describe "fetching existent vendors" do
@@ -54,6 +89,9 @@ describe Aceitafacil::Vendor do
   # describe "making a save call" do
   #   it "should create a new remote vendor" do
   #     response = @vendor.save
+
+  #     puts response.body.inspect
+
   #     response.should be_kind_of Net::HTTPSuccess
   #   end
   # end

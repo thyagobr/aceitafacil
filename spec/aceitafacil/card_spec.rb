@@ -5,6 +5,22 @@ describe Aceitafacil::Card do
 
   before do
     @card = Aceitafacil::Card.new(card_params)
+    @card.save
+  end
+
+  describe "instatiating a new card" do
+    it "should return valid true when" do
+      @invalid = Aceitafacil::Card.new
+      @invalid.valid?.should be_false
+    end
+
+    it "should return message erros for fields" do
+      @invalid = Aceitafacil::Card.new
+      @invalid.valid?
+      [:customer_id, :number, :name, :cvv, :exp_date].each do |key|
+        @invalid.errors.messages.keys.should include(key)
+      end
+    end
   end
 
   describe "make a remove call" do

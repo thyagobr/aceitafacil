@@ -42,8 +42,6 @@ module Aceitafacil
       return response
     end
 
-
-
     def get(path, params={})
       if not params.nil?
         request = Net::HTTP::Get.new("/#{path}?".concat(params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&'))) 

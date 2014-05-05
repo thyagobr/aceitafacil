@@ -10,7 +10,7 @@ Adicione esta linha ao seu Gemfile:
 
 E execute:
 
-    $ bundle
+    $ bundle install
 
 Ou instale assim:
 
@@ -21,19 +21,20 @@ Ou instale assim:
 Cadastre os vendedores que receberão os pagamentos da loja em questão da seguinte forma:
     
     @vendor = Aceitafacil::Vendor.new(id: "2", name: "Vendor name", email: "vendor@vendor.com", 
-    bank: { 
+    bank: @bank)
+
+    @vendor.save
+
+O id: refere-se ao ID do vendedor na base de dados da aplicação Host. O objeto @bank pode ser instanciado da seguinte forma:
+    
+    @bank = Aceitafacil::Bank.new({ 
         code: "001", 
         agency: "123-4", 
         account_type: 1, # 1 Corrent, 2 Poupança
         account_number: "1234-5", 
         account_holder_name: "Fulano",
         account_holder_document_type: 1, # 1 CPF, 2 CNPJ
-        account_holder_document_number: "12345678909"
-    })
-
-    @vendor.save
-
-O id: refere-se ao ID do vendedor na base de dados da aplicação Host.
+        account_holder_document_number: "12345678909"})
 
 Implemente um formulário para capturar os dados do cartão de crédito. Segue um exemplo:
 

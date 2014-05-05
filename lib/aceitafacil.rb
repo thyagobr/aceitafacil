@@ -1,10 +1,16 @@
-require 'active_support'
+require 'active_support/core_ext'
+require 'active_model'
 require "builder"
 require "net/http"
 require "net/https"
 require "json"
 
 module Aceitafacil
+    def self.clear_data
+        @connection = Aceitafacil::Connection.new
+        @connection.post("cleardata")
+    end
+
     class Production
         BASE_URL = "api.aceitafacil.com"
     end

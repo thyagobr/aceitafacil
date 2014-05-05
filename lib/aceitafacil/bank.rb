@@ -2,6 +2,11 @@
 
 module Aceitafacil 
     class Bank
+        include ActiveModel::Validations
+
+        validates :code, :agency, :account_type, :account_number, :account_holder_name, presence: true
+        validates :account_holder_document_type, :account_holder_document_number, presence: true
+
         attr_accessor :code, :agency, :account_type, :account_number, :account_holder_name
         attr_accessor :account_holder_document_type, :account_holder_document_number
 

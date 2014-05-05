@@ -3,6 +3,12 @@ require 'fakeweb'
 
 FakeWeb.allow_net_connect = true
 
+RSpec.configure do |config|
+  config.before(:all) do
+    Aceitafacil.clear_data
+  end
+end
+
 Aceitafacil.setup do |config|
   # Altere para production ao final dos seus testes
   config.environment = :test

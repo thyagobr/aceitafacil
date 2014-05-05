@@ -2,6 +2,10 @@
 
 module Aceitafacil 
     class Vendor
+        include ActiveModel::Validations
+
+        validates :id, :email, :name, :bank, presence: true
+
         attr_accessor :id, :name, :email, :bank
 
         def initialize(params = {})
@@ -10,7 +14,7 @@ module Aceitafacil
             self.id = params[:id]
             self.name = params[:name]
             self.email = params[:email]
-            self.bank = Bank.new(params[:bank]) if params[:bank]
+            self.bank = params[:bank]
         end
 
         def params
@@ -70,6 +74,8 @@ module Aceitafacil
         end
 
         def save
+            return false if not self.valid? or not self.bank.valid?
+            
             response = @connection.post("vendor", params)
 
             return response
