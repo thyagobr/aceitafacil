@@ -5,7 +5,7 @@ describe Aceitafacil::Card do
 
   before do
     @card = Aceitafacil::Card.new(card_params)
-    @card.save
+    #@card.save
   end
 
   describe "instatiating a new card" do
@@ -48,7 +48,10 @@ describe Aceitafacil::Card do
     end
 
     it "should return a list cards" do
+      puts @card.params.inspect
+
       @card.save
+
       @cards = Aceitafacil::Card.find_by_customer_id("1") 
       @cards.count.should == 1
     end

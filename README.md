@@ -2,21 +2,25 @@
 
 Esta gem habilita as funcionalidades da API do serviço [Aceita Fácil][url] no Ruby on Rails.
 
-## Installation
+## Instalação
 
 Adicione esta linha ao seu Gemfile:
 
     gem 'aceitafacil'
 
-E execute:
+Execute para instalar a gem no seu projeto:
 
     $ bundle install
+
+Em seguida instale o arquivo de configuração na sua aplicação:
+
+    $ rails generate aceitafacil:install
 
 Ou instale assim:
 
     $ gem install aceitafacil
 
-## Usage
+## Como utilizar
 
 Cadastre os vendedores que receberão os pagamentos da loja em questão da seguinte forma:
     
@@ -74,6 +78,12 @@ Após a chamada do método save todos os métodos abaixo deverão estar preenchi
     @payment.chargetype
     @payment.payer
     @payment.paid
+
+Todos os modelos Card, Vendor, Bank, Item, Payment possuem validação no estilo ActiveRecord, ex:
+    
+    @card.valid? 
+
+Se for válido retornará true, se não false e o array @card.errors será preenchido com as mensagens de erro padrão do ActiveRecord.
 
 ## Contributing
 

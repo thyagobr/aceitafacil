@@ -2,6 +2,11 @@
 
 module Aceitafacil 
     class Payment
+        include ActiveModel::Validations
+        
+        validates :card, :customer_id, :customer_name, :customer_email, :customer_email_language, presence: true
+        validates :description, :paymentmethod_id, :total_amount, presence: true
+
         attr_accessor :card, :customer_id, :customer_name, :customer_email, :customer_email_language
         attr_accessor :organization_id, :organization_name, :paymentmethod, :charge_type, :payer, :total_amount
         attr_accessor :paid, :closed, :attempted, :attempted_count, :next_payment_attempt, :period_start
@@ -46,6 +51,12 @@ module Aceitafacil
         end
 
         def save
+            return false if not self.valid?
+            
+            self.items.each do |item|
+                return false if not item.valid?
+            end
+
             response = @connection.post("payment", params)
 
             json = JSON.parse(response.body)

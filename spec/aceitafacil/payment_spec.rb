@@ -38,6 +38,27 @@ describe Aceitafacil::Payment do
         } 
       }
 
+      it "should return false if an item is invalid" do
+        @item = Aceitafacil::Item.new
+        @item.valid?.should be_false
+      end
+
+      it "should return false if an item is invalid" do
+        @payment = Aceitafacil::Payment.new
+
+        @payment.valid?.should be_false
+      end
+
+      it "should return false if an item is invalid" do
+        incorrect_params = payment_params.dup
+        
+        incorrect_params[:item] = [Aceitafacil::Item.new]
+
+        @payment = Aceitafacil::Payment.new(incorrect_params)
+        
+        @payment.valid?.should be_false
+      end
+
       it "should return a successfully response" do
         response = @payment.save
         response.should be_kind_of Net::HTTPSuccess
