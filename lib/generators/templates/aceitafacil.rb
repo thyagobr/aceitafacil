@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# Use esse arquivo para configurar a integração com o Aceita Fácil.
+# Use esse arquivo para configurar a integração com o aceitaFacil.
 Aceitafacil.setup do |config|
   # Altere para production ao final dos seus testes
   config.environment = :test
