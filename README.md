@@ -1,6 +1,6 @@
-# Aceita Fácil
+# aceitaFacil
 
-Esta gem habilita as funcionalidades da API do serviço [Aceita Fácil][url] no Ruby on Rails.
+Esta gem habilita as funcionalidades da API do serviço [aceitaFacil][url] no Ruby on Rails.
 
 ## Instalação
 
@@ -47,7 +47,7 @@ Implemente um formulário para capturar os dados do cartão de crédito. Segue u
 
 O customer_id reference ao ID do cliente no banco de dados da aplicação Host.
 
-O método __save__ sincroniza as informações enviadas com o servidor do [Aceita Fácil][url].
+O método __save__ sincroniza as informações enviadas com o servidor do [aceitaFacil][url].
 
 Com os dados do cartão de crédito enviados e os vendedores cadastrados você já pode efetuar um pagamento, segue um exemplo:
 
@@ -93,4 +93,4 @@ Se for válido retornará true, se não false e o array @card.errors será preen
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-[url]: http://www.aceitafacil.com  "Aceita Fácil"
+[url]: http://aceitafacil.com/  "aceitaFacil"

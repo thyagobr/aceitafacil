@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Aceitafacil::VERSION
   spec.authors       = ["Wilbert Ribeiro"]
   spec.email         = ["wkelyson@gmail.com"]
-  spec.summary       = %q{ This gem enables Aceita Fácil API features on Ruby on Rails }
-  spec.description   = %q{ It implements Cards and Payments from Aceita Fácil doc spec. }
+  spec.summary       = %q{ This gem enables aceitaFacil API features on Ruby on Rails }
+  spec.description   = %q{ It implements Cards and Payments from aceitaFacil doc spec. }
   spec.homepage      = "http://www.github.com/wilbert/aceitafacil"
   spec.license       = "MIT"
 
