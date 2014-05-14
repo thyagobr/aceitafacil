@@ -2,9 +2,11 @@
 
 module Aceitafacil
     class Card
+        include ActiveModel::Model
         include ActiveModel::Validations
 
         validates :customer_id, :number, :name, :cvv, :exp_date, presence: true
+        validates :exp_date, format: { with: /\d{6}/ }
 
         attr_accessor :customer_id, :number, :name, :cvv, :exp_date
         attr_accessor :token, :card_brand, :last_digits, :status
@@ -21,6 +23,8 @@ module Aceitafacil
             response = @connection.get("card", connection_params)
 
             json = JSON.parse(response.body)
+
+            return [] if json["card"].nil?
 
             json["card"].each do |remote_card|
                 card = Card.new(token: remote_card["token"], card_brand: remote_card["card_brand"], last_digits: remote_card["last_digits"])
@@ -81,7 +85,7 @@ module Aceitafacil
             response = @connection.post("card", params)
 
             json = JSON.parse(response.body)
-
+            
             self.token = json["card"][0]["token"]
             self.card_brand = json["card"][0]["card_brand"]
             self.last_digits = json["card"][0]["last_digits"]

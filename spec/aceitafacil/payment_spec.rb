@@ -3,9 +3,34 @@
 require 'spec_helper'
 
 describe Aceitafacil::Payment do
+  let(:card_params) { { name: "Card Holder", number: "4012001038443335", cvv: "123", exp_date: "201807", customer_id: "1" } }
 
-  before :each do
-    @vendor = Aceitafacil::Vendor.find(2)
+  let(:bank_params) {
+    { 
+      code: "001", 
+      agency: "123-4", 
+      account_type: 1, # 1 Corrent, 2 Poupança
+      account_number: "1234-5", 
+      account_holder_name: "Fulano",
+      account_holder_document_type: 1, # 1 CPF, 2 CNPJ
+      account_holder_document_number: "12345678909"
+    }
+  }
+
+  let(:vendor_params) { 
+    { 
+      id: "2", name: "Vendor name", email: "vendor@vendor.com", bank: @bank
+    } 
+  }
+
+  before do
+    @card = Aceitafacil::Card.new(card_params)
+    @bank = Aceitafacil::Bank.new(bank_params)
+    @vendor = Aceitafacil::Vendor.new(vendor_params)
+
+    @vendor.save
+    @card.save
+
     @card = Aceitafacil::Card.find_by_customer_id(1)[0]
     @item = Aceitafacil::Item.new(item_params)
     @payment = Aceitafacil::Payment.new(payment_params)
@@ -34,7 +59,7 @@ describe Aceitafacil::Payment do
           vendor_name: @vendor.name, 
           fee_split: 1,
           description: "Test item",
-          trigger_lock: false
+          trigger_lock: "false"
         } 
       }
 
@@ -49,19 +74,18 @@ describe Aceitafacil::Payment do
         @payment.valid?.should be_false
       end
 
-      it "should return false if an item is invalid" do
-        incorrect_params = payment_params.dup
+      # it "should return false if an item is invalid" do
+      #   incorrect_params = payment_params.dup
         
-        incorrect_params[:item] = [Aceitafacil::Item.new]
+      #   incorrect_params[:item] = [Aceitafacil::Item.new]
 
-        @payment = Aceitafacil::Payment.new(incorrect_params)
-        
-        @payment.valid?.should be_false
-      end
+      #   @payment = Aceitafacil::Payment.new(incorrect_params)
+      #   @payment.save.should be_false
+      # end
 
       it "should return a successfully response" do
         response = @payment.save
-        response.should be_kind_of Net::HTTPSuccess
+        response.should be_kind_of Net::HTTPOK
       end
 
       it "should return a correct params" do

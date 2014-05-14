@@ -3,6 +3,7 @@
 module Aceitafacil 
     class Payment
         include ActiveModel::Validations
+        include ActiveModel::Model
         
         validates :card, :customer_id, :customer_name, :customer_email, :customer_email_language, presence: true
         validates :description, :paymentmethod_id, :total_amount, presence: true

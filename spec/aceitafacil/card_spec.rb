@@ -48,8 +48,6 @@ describe Aceitafacil::Card do
     end
 
     it "should return a list cards" do
-      puts @card.params.inspect
-
       @card.save
 
       @cards = Aceitafacil::Card.find_by_customer_id("1") 

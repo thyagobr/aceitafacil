@@ -79,20 +79,19 @@ describe Aceitafacil::Vendor do
     end
 
     it "should update a remote vendor" do
+      @vendor.save
       @vendor.name = "Chuck Norris"
       @vendor.update
-      @vendor = Aceitafacil::Vendor.find(2)
+      @vendor = Aceitafacil::Vendor.find(@vendor.id)
       @vendor.name.should eq("Chuck Norris")
     end
   end  
 
-  # describe "making a save call" do
-  #   it "should create a new remote vendor" do
-  #     response = @vendor.save
-
-  #     puts response.body.inspect
-
-  #     response.should be_kind_of Net::HTTPSuccess
-  #   end
-  # end
+  describe "making a save call" do
+    it "should create a new remote vendor" do
+      response = @vendor.save
+      puts response.inspect
+      response.should be_kind_of Net::HTTPOK
+    end
+  end
 end
