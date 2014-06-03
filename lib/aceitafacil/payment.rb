@@ -5,10 +5,10 @@ module Aceitafacil
         include ActiveModel::Validations
         include ActiveModel::Model
         
-        validates :card, :customer_id, :customer_name, :customer_email, :customer_email_language, presence: true
+        validates :card_token, :customer_id, :customer_name, :customer_email, :customer_email_language, presence: true
         validates :description, :paymentmethod_id, :total_amount, presence: true
 
-        attr_accessor :card, :customer_id, :customer_name, :customer_email, :customer_email_language
+        attr_accessor :card_token, :customer_id, :customer_name, :customer_email, :customer_email_language
         attr_accessor :organization_id, :organization_name, :paymentmethod, :charge_type, :payer, :total_amount
         attr_accessor :paid, :closed, :attempted, :attempted_count, :next_payment_attempt, :period_start
         attr_accessor :period_end, :items, :id, :description, :paymentmethod_id, :chargetype
@@ -16,7 +16,7 @@ module Aceitafacil
         def initialize(params = {})
             @connection = Aceitafacil::Connection.new
 
-            self.card = params[:card]
+            self.card_token = params[:card_token]
             self.customer_id = params[:customer_id]
             self.customer_name = params[:customer_name]
             self.customer_email = params[:customer_email]
@@ -30,7 +30,7 @@ module Aceitafacil
         def params
             params = {}
             
-            params["card[token]"] = self.card.token
+            params["card[token]"] = self.card_token
             params["customer[id]"] = self.customer_id.to_i
             params["customer[name]"] = self.customer_name
             params["customer[email]"] = self.customer_email

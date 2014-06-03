@@ -65,7 +65,7 @@ Recupere as informações do TOKEN do cartão de crédito, Ex:
 
 Faça uma requisição para efetuar o pagamento:
 
-    @payment = Payment.new(description: "Test payment", customer_id: 1, customer_name: "Fulano de Tal", customer_email: "fulano@fulanodetal.com.br", customer_email_language: "pt-BR", paymentmethod_id: 1, total_amount: 10, items: [@item], card: @card)
+    @payment = Payment.new(description: "Test payment", customer_id: 1, customer_name: "Fulano de Tal", customer_email: "fulano@fulanodetal.com.br", customer_email_language: "pt-BR", paymentmethod_id: 1, total_amount: 10, items: [@item], card_token: @card.token)
 
     @payment.save
 

@@ -75,6 +75,7 @@ describe Aceitafacil::Vendor do
   describe "making a update call" do
     it do 
       response = @vendor.update
+      
       response.should be_kind_of Net::HTTPSuccess
     end
 

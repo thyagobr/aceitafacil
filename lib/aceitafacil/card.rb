@@ -23,7 +23,7 @@ module Aceitafacil
             response = @connection.get("card", connection_params)
 
             json = JSON.parse(response.body)
-
+            
             return [] if json["card"].nil?
 
             json["card"].each do |remote_card|

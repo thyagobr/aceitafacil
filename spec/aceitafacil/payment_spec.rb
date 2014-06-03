@@ -48,7 +48,7 @@ describe Aceitafacil::Payment do
           paymentmethod_id: 1, # 1 Credit Card, 2 billet
           total_amount: 10,
           items: [@item],
-          card: @card
+          card_token: @card.token
         } 
       }
 
