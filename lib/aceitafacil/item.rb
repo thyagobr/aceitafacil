@@ -4,7 +4,7 @@ module Aceitafacil
     class Item
         include ActiveModel::Validations
         
-        validates :amount, :vendor_id, :vendor_name, :fee_split, :description, :trigger_lock, presence: true
+        validates :amount, presence: true
 
         attr_accessor :amount, :vendor_id, :vendor_name, :fee_split, :description, :trigger_lock
 

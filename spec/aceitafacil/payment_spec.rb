@@ -83,11 +83,6 @@ describe Aceitafacil::Payment do
       #   @payment.save.should be_false
       # end
 
-      it "should return a successfully response" do
-        response = @payment.save
-        response.should be_kind_of Net::HTTPOK
-      end
-
       it "should return a correct params" do
         response = @payment.save
 
