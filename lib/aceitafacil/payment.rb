@@ -5,7 +5,7 @@ module Aceitafacil
         include ActiveModel::Validations
         include ActiveModel::Model
         
-        validates :customer_id, presence: true
+        validates :customer_id, :cvv, presence: true
         validates :paymentmethod_id, :total_amount, presence: true
 
         attr_accessor :card_token, :cvv, :customer_id, :customer_name, :customer_email, :customer_email_language
