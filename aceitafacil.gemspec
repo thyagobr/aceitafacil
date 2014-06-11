@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-rails",          "2.14.2"
   spec.add_development_dependency "fakeweb",              "1.3.0"
   spec.add_development_dependency "factory_girl_rails",   "4.4.0"
-  spec.add_development_dependency "debugger",             "1.6.6"
+  spec.add_development_dependency "byebug",             "3.1.2"
 end

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Aceitafacil::Payment do
-  let(:card_params) { { name: "Card Holder", number: "4012001038443335", cvv: "123", exp_date: "201807", customer_id: "1" } }
+  let(:card_params) { { name: "Card Holder", number: "4012001038443335", exp_date: "201807", customer_id: "1" } }
 
   let(:bank_params) {
     { 
@@ -48,7 +48,8 @@ describe Aceitafacil::Payment do
           paymentmethod_id: 1, # 1 Credit Card, 2 billet
           total_amount: 10,
           items: [@item],
-          card_token: @card.token
+          card_token: @card.token,
+          cvv: "123"
         } 
       }
 

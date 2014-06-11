@@ -5,10 +5,10 @@ module Aceitafacil
         include ActiveModel::Model
         include ActiveModel::Validations
 
-        validates :customer_id, :number, :name, :cvv, :exp_date, presence: true
+        validates :customer_id, :number, :name, :exp_date, presence: true
         validates :exp_date, format: { with: /\d{6}/ }
 
-        attr_accessor :customer_id, :number, :name, :cvv, :exp_date
+        attr_accessor :customer_id, :number, :name, :exp_date
         attr_accessor :token, :card_brand, :last_digits, :status
 
         def self.find_by_customer_id(customer_id)
@@ -59,7 +59,6 @@ module Aceitafacil
             self.customer_id = params[:customer_id]
             self.number = params[:number]
             self.name = params[:name]
-            self.cvv = params[:cvv]
             self.exp_date = params[:exp_date]
             self.status = params[:status]
             self.token = params[:token]
@@ -73,7 +72,6 @@ module Aceitafacil
             params["customer[id]"] = self.customer_id
             params["card[name]"] = self.name
             params["card[number]"] = self.number
-            params["card[cvv]"] = self.cvv
             params["card[exp_date]"] = self.exp_date
 
             return params

@@ -16,7 +16,7 @@ describe Aceitafacil::Connection do
 
   describe "making a request" do
     it "should make a request" do
-      @card = Aceitafacil::Card.new(name: "Card Holder", number: "4012001038443335", cvv: "123", exp_date: "201807", customer_id: "1")
+      @card = Aceitafacil::Card.new(name: "Card Holder", number: "4012001038443335", exp_date: "201807", customer_id: "1")
       response = @connection.post(:card, @card.params)
       response.body.should_not be_nil
       response.should be_kind_of Net::HTTPOK

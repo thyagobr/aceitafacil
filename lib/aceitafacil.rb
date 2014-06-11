@@ -22,9 +22,9 @@ module Aceitafacil
 
     @@environment = :test
     mattr_accessor :environment
-    @@api_key = "e3c23d27ca61ac2cc3b8a1e4ed5340247221757d"
+    @@api_key = "c3794e9a24b4f302d8c2f2fd77db345122295905"
     mattr_accessor :api_key
-    @@api_password = "773aebdf0d1202cac6837751f354c0a70553b3cd"
+    @@api_password = "34e066b02fc6443575f12ff0bb3af876e52f19ba"
     mattr_accessor :api_password
 
     def self.setup

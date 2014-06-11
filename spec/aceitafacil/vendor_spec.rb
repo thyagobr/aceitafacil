@@ -74,6 +74,8 @@ describe Aceitafacil::Vendor do
 
   describe "making a update call" do
     it do 
+      @vendor.save
+
       response = @vendor.update
       
       response.should be_kind_of Net::HTTPSuccess
@@ -88,11 +90,11 @@ describe Aceitafacil::Vendor do
     end
   end  
 
-  describe "making a save call" do
-    it "should create a new remote vendor" do
-      response = @vendor.save
-      puts response.inspect
-      response.should be_kind_of Net::HTTPOK
-    end
-  end
+  # describe "making a save call" do
+  #   it "should create a new remote vendor" do
+  #     response = @vendor.save
+  #     puts response.inspect
+  #     response.should be_kind_of Net::HTTPOK
+  #   end
+  # end
 end

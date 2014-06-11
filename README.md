@@ -42,7 +42,7 @@ O id: refere-se ao ID do vendedor na base de dados da aplicação Host. O objeto
 
 Implemente um formulário para capturar os dados do cartão de crédito. Segue um exemplo:
 
-    @card = Aceitafacil::Card.new(name: "Card Holder", number: "4012001038443335", cvv: "123", exp_date: "201807", customer_id: "1")
+    @card = Aceitafacil::Card.new(name: "Card Holder", number: "4012001038443335", exp_date: "201807", customer_id: "1")
     @card.save
 
 O customer_id reference ao ID do cliente no banco de dados da aplicação Host.

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Aceitafacil::Card do
-  let(:card_params) { { name: "Card Holder", number: "4012001038443335", cvv: "123", exp_date: "201807", customer_id: "1" } }
+  let(:card_params) { { name: "Card Holder", number: "4012001038443335", exp_date: "201807", customer_id: "1" } }
 
   before do
     @card = Aceitafacil::Card.new(card_params)
@@ -17,7 +17,7 @@ describe Aceitafacil::Card do
     it "should return message erros for fields" do
       @invalid = Aceitafacil::Card.new
       @invalid.valid?
-      [:customer_id, :number, :name, :cvv, :exp_date].each do |key|
+      [:customer_id, :number, :name, :exp_date].each do |key|
         @invalid.errors.messages.keys.should include(key)
       end
     end

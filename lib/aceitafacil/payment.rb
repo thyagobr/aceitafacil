@@ -5,10 +5,10 @@ module Aceitafacil
         include ActiveModel::Validations
         include ActiveModel::Model
         
-        validates :card_token, :customer_id, presence: true
-        validates :description, :paymentmethod_id, :total_amount, presence: true
+        validates :customer_id, presence: true
+        validates :paymentmethod_id, :total_amount, presence: true
 
-        attr_accessor :card_token, :customer_id, :customer_name, :customer_email, :customer_email_language
+        attr_accessor :card_token, :cvv, :customer_id, :customer_name, :customer_email, :customer_email_language
         attr_accessor :organization_id, :organization_name, :paymentmethod, :charge_type, :payer, :total_amount
         attr_accessor :paid, :closed, :attempted, :attempted_count, :next_payment_attempt, :period_start
         attr_accessor :period_end, :items, :id, :description, :paymentmethod_id, :chargetype
@@ -17,6 +17,7 @@ module Aceitafacil
             @connection = Aceitafacil::Connection.new
 
             self.card_token = params[:card_token]
+            self.cvv = params[:cvv]
             self.customer_id = params[:customer_id]
             self.customer_name = params[:customer_name]
             self.customer_email = params[:customer_email]
@@ -31,6 +32,7 @@ module Aceitafacil
             params = {}
             
             params["card[token]"] = self.card_token
+            params["card[cvv]"] = self.cvv
             params["customer[id]"] = self.customer_id.to_i
             params["customer[name]"] = self.customer_name unless self.customer_name.blank?
             params["customer[email]"] = self.customer_email unless self.customer_name.blank?
