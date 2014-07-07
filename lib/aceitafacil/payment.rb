@@ -29,17 +29,25 @@ module Aceitafacil
             self.items = params[:items]
         end
 
+        def is_credit_card?
+            return true if self.paymentmethod_id == 1
+            return false
+        end
+
         def params
             params = {}
             
-            params["card[token]"] = self.card_token
-            params["card[cvv]"] = self.cvv
+            if is_credit_card?
+                params["card[token]"] = self.card_token
+                params["card[cvv]"] = self.cvv    
+            end
+            
             params["customer[id]"] = self.customer_id.to_i
             params["customer[name]"] = self.customer_name unless self.customer_name.blank?
-            params["customer[email]"] = self.customer_email unless self.customer_name.blank?
-            params["customer[email_language]"] = self.customer_email_language unless self.customer_name.blank?
-            params["description"] = self.description unless self.customer_name.blank?
-            params["paymentmethod[id]"] = self.paymentmethod_id unless self.customer_name.blank?
+            params["customer[email]"] = self.customer_email unless self.customer_email.blank?
+            params["customer[email_language]"] = self.customer_email_language unless self.customer_email_language.blank?
+            params["description"] = self.description unless self.description.blank?
+            params["paymentmethod[id]"] = self.paymentmethod_id unless self.paymentmethod_id.blank?
             params["total_amount"] = Aceitafacil::Utils.format_number(self.total_amount)
 
             self.items.each_with_index do |item, index|
@@ -82,7 +90,11 @@ module Aceitafacil
                 self.period_start = json["period_start"]
                 self.period_end = json["period_end"]    
 
-                return true
+                if is_credit_card?
+                    return true    
+                else
+                    return json["boleto"]["url"]
+                end
             end
         end
     end
