@@ -85,8 +85,6 @@ module Aceitafacil
             response = @connection.post("card", params)
 
             json = JSON.parse(response.body)
-
-            # {"errors"=>[{"message"=>"Dados de cartao invalidos", "name"=>"INVALID CARD INFORMATION", "at"=>""}]}
             
             if json["errors"]
                 self.errors.add(:number, json["errors"][0]["message"])
