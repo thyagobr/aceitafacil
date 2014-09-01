@@ -7,6 +7,8 @@ module Aceitafacil
 
         validates :customer_id, :number, :name, :exp_date, presence: true
         validates :exp_date, format: { with: /\d{6}/ }
+        validates :number, format: { with: /\d{4}\s\d{4}\s\d{4}\s\d{4}/,message: I18n.t(:invalid_card_number, scope: "activerecord.error.messages") }
+         validates :number, length: { minimum: 16 }
 
         attr_accessor :customer_id, :number, :name, :exp_date
         attr_accessor :token, :card_brand, :last_digits, :status
@@ -71,7 +73,7 @@ module Aceitafacil
 
             params["customer[id]"] = self.customer_id
             params["card[name]"] = self.name
-            params["card[number]"] = self.number
+            params["card[number]"] = self.number.gsub(" ", "")
             params["card[exp_date]"] = self.exp_date
 
             return params
@@ -83,12 +85,19 @@ module Aceitafacil
             response = @connection.post("card", params)
 
             json = JSON.parse(response.body)
-            
-            self.token = json["card"][0]["token"]
-            self.card_brand = json["card"][0]["card_brand"]
-            self.last_digits = json["card"][0]["last_digits"]
 
-            return response
+            # {"errors"=>[{"message"=>"Dados de cartao invalidos", "name"=>"INVALID CARD INFORMATION", "at"=>""}]}
+            
+            if json["errors"]
+                self.errors.add(:number, json["errors"][0]["message"])
+                return false
+            else
+                self.token = json["card"][0]["token"]
+                self.card_brand = json["card"][0]["card_brand"]
+                self.last_digits = json["card"][0]["last_digits"]
+
+                return response
+            end    
         end
     end
 end
