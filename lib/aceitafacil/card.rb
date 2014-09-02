@@ -81,7 +81,6 @@ module Aceitafacil
 
         def save
             return false if not self.valid?
-
             response = @connection.post("card", params)
 
             json = JSON.parse(response.body)
