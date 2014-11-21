@@ -1,9 +1,10 @@
 require 'active_support/core_ext'
 require 'active_model'
-require "builder"
-require "net/http"
-require "net/https"
-require "json"
+require 'credit_card_validations'
+require 'builder'
+require 'net/http'
+require 'net/https'
+require 'json'
 
 module Aceitafacil
     def self.clear_data

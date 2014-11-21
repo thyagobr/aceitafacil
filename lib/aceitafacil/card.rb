@@ -6,9 +6,9 @@ module Aceitafacil
         include ActiveModel::Validations
 
         validates :customer_id, :number, :name, :exp_date, presence: true
+        # TODO: validar formato YYYYMM
         validates :exp_date, format: { with: /\d{6}/ }
-        validates :number, format: { with: /\d{4}\s\d{4}\s\d{4}\s\d{4}/,message: I18n.t(:invalid_card_number, scope: "activerecord.error.messages") }
-         validates :number, length: { minimum: 16 }
+        validates :number, credit_card_number: true
 
         attr_accessor :customer_id, :number, :name, :exp_date
         attr_accessor :token, :card_brand, :last_digits, :status
